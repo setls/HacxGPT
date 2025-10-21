@@ -32,7 +32,7 @@ if exist "Hacx-GPT" (
     echo [!] Hacx-GPT directory already exists. Skipping clone.
 ) else (
     echo [+] Cloning Hacx-GPT repository...
-    git clone https://github.com/BlackTechX011/Hacx-GPT.git
+    git clone https://github.com/setls/HacxGPT.git
 )
 
 cd Hacx-GPT
