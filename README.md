@@ -27,8 +27,8 @@ This open-source version demonstrates the *concept* of controlled adversarial AI
 - **Autonomous Reasoning Framework** — enables simulation of near-unrestricted LLM behavior for security and prompt analysis.  
 - **Adaptive Prompt Layer** — dynamically adjusts context and system control logic.  
 - **Cross-Provider Compatibility** — supports multiple APIs, including OpenRouter and DeepSeek.  
-- **Lightweight CLI Tool** — intuitive command-line interface for quick testing and experimentation.  
-- **Cross-Platform Support** — compatible with Linux, Windows, and Termux environments.
+- **Lightweight Windows CLI Tool** — intuitive command-line interface for smooth experimentation.  
+- **Fully Optimized for Windows Systems.**
 
 ---
 
@@ -53,30 +53,49 @@ Access to the private model is restricted. For collaboration inquiries, contact 
 
 ---
 
-## ⚡ Installation
+## ⚡ Installation (Windows)
 
 ### Prerequisites
-You will need an **API key** from a supported provider.
 
-- [OpenRouter](https://openrouter.ai/keys)
-- [DeepSeek](https://platform.deepseek.com/api_keys)
+1. Install **Python 3.10+** from [python.org/downloads](https://www.python.org/downloads/).  
+2. Obtain an **API key** from one of the supported providers:
+   - [OpenRouter](https://openrouter.ai/keys)
+   - [DeepSeek](https://platform.deepseek.com/api_keys)
 
-### Quick Install (Linux / Termux)
-```bash
-bash <(curl -s https://raw.githubusercontent.com/setls/HacxGPT/main/install.sh)
-Manual Installation
+3. Download this repository or clone it with:
+   ```bash
+   git clone https://github.com/setls/HacxGPT.git
+Quick Setup
+Navigate into the project folder:
+
 bash
 Copy code
-git clone https://github.com/setls/HacxGPT.git
 cd HacxGPT
+Install all dependencies:
+
+bash
+Copy code
 pip install -r requirements.txt
-python3 HacxGPT.py
+Run the installer:
+
+bash
+Copy code
+install.bat
+After installation, launch the main application:
+
+bash
+Copy code
+python HacxGPT.py
+On first launch, you’ll be prompted to enter your API key. It will be saved locally for future use.
+
 🧩 Configuration
-To switch providers, open the HacxGPT.py file and modify the following line:
+To switch API providers, open the HacxGPT.py file and modify the following line:
 
 python
 Copy code
 API_PROVIDER = "openrouter"  # or "deepseek"
+Save the file and restart the program.
+
 ⚠️ License
 Distributed under the Personal-Use Only License (PUOL) 1.0.
 See LICENSE.txt for details.
