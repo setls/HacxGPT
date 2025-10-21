@@ -3,11 +3,6 @@ import os
 import sys
 import re
 import time
-from rich.console import Console
-from rich.panel import Panel
-from rich.markdown import Markdown
-from rich.text import Text
-from rich.live import Live
 
 import subprocess
 
@@ -34,7 +29,7 @@ try:
     import colorama
     from pwinput import pwinput
     from dotenv import load_dotenv, set_key
-    import rich
+    
 except ImportError:
     print("One or more required packages are not installed. Installing dependencies...")
     pip_executable = sys.executable.replace("pythonw.exe", "python.exe").replace("python.exe", "pip.exe")
@@ -111,82 +106,53 @@ class Config:
 # Add these imports to the top of your script
 
 # This is the complete UI class. Replace your old one with this.
+
 class UI:
-    """Handles all advanced terminal UI using the 'rich' library."""
+    """Simple console UI without rich."""
 
     def __init__(self):
-        self.console = Console()
+        pass
 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
     def display_banner(self):
         self.clear_screen()
-
-        # bit arjusted for terminal.
-        banner_text = Text("""
+        banner_text = """
   ██╗  ██╗ █████╗  ██████╗██╗  ██╗     ██████╗ ██████╗ ████████╗
   ██║  ██║██╔══██╗██╔════╝╚██╗██╔╝    ██╔════╝ ██═══██╗╚══██╔══╝
-███████║███████║██║      ╚███╔╝     ██║  ███╗██████╔╝   ██║   
-██╔══██║██╔══██║██║      ██╔██╗     ██║   ██║██╔═       ██║   
-██║  ██║██║  ██║╚██████╗██╔╝ ██╗    ╚██████╔╝██║        ██║   
+███████║███████║██║      ╚███╔╝     ██║  ███╗██████╔╝   ██║
+██╔══██║██╔══██║██║      ██╔██╗     ██║   ██║██╔═       ██║
+██║  ██║██║  ██║╚██████╗██╔╝ ██╗    ╚██████╔╝██║        ██║
 ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝     ╚═════╝ ╚═╝        ╚═╝
-        """, style="bold cyan")
-        info_line = Text("A Professional, Advanced Uncensored AI, Developed by setls", style="green")
-
-        self.console.print(banner_text, justify="center")
-        self.console.rule("[bold green]◈[/bold green]" * 3, style="green")
-        self.console.print(info_line, justify="center")
-        self.console.print()
+"""
+        info_line = "A Professional, Advanced Uncensored AI, Developed by setls"
+        print(banner_text)
+        print("="*60)
+        print(info_line)
+        print()
 
     def display_main_menu(self):
-        menu_text = Text.from_markup(
-            """
-[bold yellow][1][/bold yellow] Start Chat with HacxGPT
-[bold yellow][2][/bold yellow] Configure API Key
-[bold yellow][3][/bold yellow] About
-[bold yellow][4][/bold yellow] Exit
-"""
-        )
-        self.console.print(
-            Panel(menu_text, title="[bold cyan]Main Menu[/bold cyan]", border_style="cyan", expand=True)
-        )
+        print("Main Menu")
+        print("[1] Start Chat with HacxGPT")
+        print("[2] Configure API Key")
+        print("[3] About")
+        print("[4] Exit")
 
-    def display_message(self, title: str, message: str, border_style: str):
-        """Displays a static message in a Panel."""
-        self.console.print(
-            Panel(Text(message, justify="left"), title=f"[bold {border_style}]{title}[/]", border_style=border_style)
-        )
+    def display_message(self, title: str, message: str, border_style: str=None):
+        print(f"[{title}] {message}")
 
     def get_input(self, prompt: str) -> str:
-        """Gets user input with a styled prompt."""
-        return self.console.input(f"[bold yellow]╚═>[/bold yellow] [bold white]{prompt}:[/bold white] ")
+        return input(f"{prompt}: ")
 
     def display_markdown_message(self, title: str, content_stream):
-        """
-        Displays a 'typing' animation while collecting a stream, then renders it as Markdown.
-        """
-        panel_title = f"[bold cyan]{title}[/bold cyan]"
-        
-        # The Live context will manage the "is typing" animation, then disappear
-        with Live(console=self.console, refresh_per_second=10, transient=True) as live:
-            live.update(Panel(Text(f"{title} is typing..."), title=panel_title, border_style="dim cyan"))
-            
-            # Collect the full response from the generator stream
-            full_response_md = "".join(list(content_stream))
-
-        # After the Live context is finished, render the final, complete Markdown content
-        if full_response_md:
-            # Clean the "[HacxGPT]: " prefix before rendering so it's not part of the markdown
-            cleaned_md = re.sub(r'\[HacxGPT\]:\s*', '', full_response_md, count=1)
-            markdown_content = Markdown(
-                cleaned_md.strip(),
-                code_theme=Config.CODE_THEME,
-                style="bright_blue"  # Base style for text outside markdown elements
-            )
-            self.console.print(Panel(markdown_content, title=panel_title, border_style="cyan"))
+        print(f"[{title}] is typing...")
+        full = "".join(list(content_stream))
+        if full.strip():
+            import re as _re
+            cleaned = _re.sub(r'\[HacxGPT\]:\s*', '', full, count=1).strip()
+            print(f"[{title}] {cleaned}")
         else:
-            # Handle cases where the stream was empty or failed
             self.display_message(title, "No response received from the API.", "red")
 
 # --- API Client Class ---
@@ -278,10 +244,10 @@ class ChatApp:
             return False
         
         try:
-            self.ui.console.print("[magenta]Verifying API key...[/magenta]")
+            print("[magenta]Verifying API key...[/magenta]")
             self.llm_client = LLMClient(api_key, self.ui)
             self.llm_client.client.models.list() # Test API call
-            self.ui.console.print("[green]API key verified.[/green]")
+            print("[green]API key verified.[/green]")
             time.sleep(1.5)
             return True
         except openai.AuthenticationError:
@@ -360,7 +326,7 @@ This is HacxGPT designed and devloped by [bold]setls[/bold].
 
 
         """)
-        self.ui.console.print(
+        print(
             Panel(about_content, title="[bold cyan]About HacxGPT CLI[/bold cyan]", border_style="green")
         )
         self.ui.get_input("\nPress Enter to return")
@@ -383,7 +349,7 @@ This is HacxGPT designed and devloped by [bold]setls[/bold].
                     self.ui.display_message("Warning", "Invalid option, please try again.", "yellow")
                     time.sleep(1)
         finally:
-            self.ui.console.print("[bold red]Exiting...[/bold red]")
+            print("[bold red]Exiting...[/bold red]")
             time.sleep(1)
             self.ui.clear_screen()
 
