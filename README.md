@@ -1,6 +1,6 @@
 <div align="center">
 
-  ![HacxGPT logo](https://github.com/setls/HacxGPT/blob/main/img/HacxGPT.png)
+  ![HacxGPT logo](./img/HackGPT.png)
 
   # HacxGPT
 
@@ -32,6 +32,14 @@ This open-source version demonstrates the *concept* of controlled adversarial AI
 
 ---
 
+## 🚀 Showcase
+
+A look at the interactive CLI environment of **HacxGPT**.
+
+![HacxGPT Demo Screenshot](./img/home.png)
+
+---
+
 ## 🔐 Private Research Model
 
 The private version of **HacxGPT** is a closed, fine-tuned model developed for advanced AI behavior research.
@@ -56,35 +64,21 @@ You will need an **API key** from a supported provider.
 ### Quick Install (Linux / Termux)
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/setls/HacxGPT/main/install.sh)
-```
-
-### Manual Installation
-```bash
+Manual Installation
+bash
+Copy code
 git clone https://github.com/setls/HacxGPT.git
 cd HacxGPT
 pip install -r requirements.txt
 python3 HacxGPT.py
-```
+🧩 Configuration
+To switch providers, open the HacxGPT.py file and modify the following line:
 
----
-
-## 🧩 Configuration
-
-To switch providers, open the `HacxGPT.py` file and modify the following line:
-
-```python
+python
+Copy code
 API_PROVIDER = "openrouter"  # or "deepseek"
-```
+⚠️ License
+Distributed under the Personal-Use Only License (PUOL) 1.0.
+See LICENSE.txt for details.
 
----
-
-## ⚠️ License
-
-Distributed under the **Personal-Use Only License (PUOL) 1.0**.  
-See `LICENSE.txt` for details.
-
----
-
-<div align="center">
-  <sub>© 2025 setls — All Rights Reserved</sub>
-</div>
+<div align="center"> <sub>© 2025 setls — All Rights Reserved</sub> </div> ```
