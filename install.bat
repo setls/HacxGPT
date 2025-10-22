@@ -1,6 +1,6 @@
 @echo off
 title HacxGPT Installer
- 
+
 echo ======================================
 echo     HacxGPT Installer for Windows
 echo ======================================
@@ -32,7 +32,7 @@ if exist "Hacx-GPT" (
     echo [!] Hacx-GPT directory already exists. Skipping clone.
 ) else (
     echo [+] Cloning Hacx-GPT repository...
-    git clone https://github.com/setls/HacxGPT.git
+    git clone https://github.com/BlackTechX011/Hacx-GPT.git
 )
 
 cd Hacx-GPT
