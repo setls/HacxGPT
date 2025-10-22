@@ -99,8 +99,7 @@ Save the file and restart the program.
 
 ### ⚠️ License
 
-Distributed under the **Personal-Use Only License (PUOL) 1.0**.  
-See `LICENSE.txt` for details.
+Distributed under the **MIT LICENSE**.  
 
 ---
 
